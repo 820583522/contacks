@@ -32,5 +32,5 @@ void ContactDel(contact* pc);
 void ContactSearch(contact* pc);
 int ContactSearchByName(contact* pc);
 void ContactModify(contact* pc);
-
+void ContactSort(contact* pc);
 void ContactDestory(contact* pc);

@@ -46,6 +46,7 @@ int main()
 			ContactModify(&con);
 			break;
 		case SORT:
+			ContactSort(&con);
 			break;
 		case PRINT:
 			ContactPrint(&con);

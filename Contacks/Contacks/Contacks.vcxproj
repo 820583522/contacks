@@ -65,7 +65,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="contacts.c" />
+    <ClCompile Include="contact.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
