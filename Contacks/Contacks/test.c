@@ -51,6 +51,7 @@ int main()
 			ContactPrint(&con);
 			break;
 		case EXIT:
+			ContactDestory(&con);
 			break;
 		default:
 			printf("Option error\n");

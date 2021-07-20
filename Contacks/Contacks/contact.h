@@ -2,8 +2,9 @@
 
 #include<stdio.h>
 #include<string.h>
-
-#define MAX 1000
+#include<stdlib.h>
+#define DefaultValue 3
+#define IncreaseValue 2
 #define MAX_NAME 20
 #define MAX_SEX 10
 #define MAX_TELE 12
@@ -19,8 +20,9 @@ typedef struct PeoInfo
 
 typedef struct contact
 {
-	PeoInfo date[MAX];
+	PeoInfo* date;
 	int size;
+	int capcity;
 }contact;
 
 void ContactInit(contact* pc);
@@ -30,3 +32,5 @@ void ContactDel(contact* pc);
 void ContactSearch(contact* pc);
 int ContactSearchByName(contact* pc);
 void ContactModify(contact* pc);
+
+void ContactDestory(contact* pc);

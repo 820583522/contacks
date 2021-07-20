@@ -1,10 +1,24 @@
-#define _CRT_SECURE_NO_WARNINGS 1
+	#define _CRT_SECURE_NO_WARNINGS 1
 
 #include"contact.h"
+//静态初始化
+//void ContactInit(contact* pc)
+//{
+//	pc->size = 0;
+//	memset(pc->date, 0, sizeof(pc->date));
+//}
+
+//动态初始化
 void ContactInit(contact* pc)
 {
+	pc->date = (PeoInfo*)malloc(sizeof(PeoInfo)*DefaultValue);
+	if (pc->date == NULL)
+	{
+		perror("ContactInit");
+		return;
+	}
+	pc->capcity = DefaultValue;
 	pc->size = 0;
-	memset(pc->date, 0, sizeof(pc->date));
 }
 
 void ContactPrint(const contact* pc)
@@ -20,10 +34,20 @@ void ContactPrint(const contact* pc)
 
 void ContactAdd(contact* pc)
 {
-	if (pc->size == MAX)
+	if (pc->size == pc->capcity)
 	{
-		printf("The address book is full. Cannot continue to add\n");
-		return;
+		PeoInfo* adjust = (PeoInfo*)realloc(pc->date, sizeof(PeoInfo)*(pc->capcity + IncreaseValue));
+		if (adjust == NULL)
+		{
+			printf("Capacity increase operation failed\n");
+			return;
+		}
+		else
+		{
+			printf("Capacity increase operation successful\n");
+			pc->date = adjust;
+			pc->capcity += IncreaseValue;
+		}
 	}
 	printf("Please enter name:\n");
 	scanf("%s", pc->date[pc->size].name);
@@ -36,6 +60,7 @@ void ContactAdd(contact* pc)
 	printf("Please enter address:\n");
 	scanf("%s", pc->date[pc->size].addr);
 	pc->size++;
+	printf("Successfully adding\n");
 }
 
 void ContactDel(contact* pc)
@@ -113,4 +138,10 @@ void ContactModify(contact* pc)
 		printf("Please enter a new address\n");
 		scanf("%s", pc->date[pos].addr);
 	}
+}
+
+void ContactDestory(contact* pc)
+{
+	free(pc->date);
+	pc->size = pc->capcity = 0; 
 }
